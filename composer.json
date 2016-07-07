@@ -1,0 +1,17 @@
+{
+    "name": "LeMaX/meetingat-socket-client.git",
+    "description": "MeetingAt special client socket server",
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "@stable",
+        "mashape/unirest-php": "2.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "LeMaX\\meetingat-socket-client\\": "src/"
+        }
+    }
+}
