@@ -8,22 +8,24 @@
 
 namespace LeMaX10\MeetingatSocketClient\methods;
 
+use LeMaX10\MeetingatSocketClient\Enums\SendTypeEnum;
+
 class UsersMethod implements MethodInterface
 {
     use MethodTrait;
 
     public function create(array $arguments = [])
     {
-        return $this->send('POST:users', $arguments);
+        return $this->send(SendTypeEnum::POST, 'users', $arguments);
     }
 
     public function get(int $userId)
     {
-        return $this->send('GET:users/:id', ['params' => ['id' => $userId]]);
+        return $this->send(SendTypeEnum::GET, 'users/:id', ['params' => ['id' => $userId]]);
     }
 
     public function update(int $userId, array $params = [])
     {
-        return $this->send('PUT:users/:id', ['params' => ['id' => $userId], 'body' => $params]);
+        return $this->send(SendTypeEnum::PUT, 'users/:id', ['params' => ['id' => $userId], 'body' => $params]);
     }
 }

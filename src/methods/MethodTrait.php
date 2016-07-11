@@ -8,6 +8,7 @@
 
 namespace LeMaX10\MeetingatSocketClient\methods;
 
+use LeMaX10\MeetingatSocketClient\Enums\SendTypeEnum;
 use Unirest\Request;
 
 trait MethodTrait
@@ -16,6 +17,7 @@ trait MethodTrait
     protected $headers = [
         'Accept' => 'application/json'
     ];
+    protected $timeout = '5';
 
     public function setConfig(array $config = [])
     {
@@ -46,12 +48,10 @@ trait MethodTrait
         return $this->config['host'] . $url;
     }
 
-    public function send(string $url, array $arguments = [])
+    public function send(string $type, string $url, array $arguments = [])
     {
-        list($method, $url) = explode(':', $url, 2);
-
+        SendTypeEnum::assertExists($type);
         if(array_key_exists('params', $arguments) && is_array($arguments['params'])) {
-
             foreach($arguments['params'] as $param => $value) {
                 $url = str_replace(':' . $param, $value, $url);
             }
@@ -59,9 +59,9 @@ trait MethodTrait
             if(array_key_exists('body', $arguments) && is_array($arguments['body'])) {
                 $arguments = $arguments['body'];
             }
-            
         }
 
-        return Unirest\Request::$method($this->getUrlString($url), $this->getHeaders(), $arguments);
+        Unirest\Request::timeout($this->timeout);
+        return Unirest\Request::$type($this->getUrlString($url), $this->getHeaders(), $arguments);
     }
 }

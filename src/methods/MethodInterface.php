@@ -11,5 +11,5 @@ namespace LeMaX10\MeetingatSocketClient\methods;
 
 interface MethodInterface
 {
-    public function send(string $url, array $arguments = []);
+    public function send(string $type, string $url, array $arguments = []);
 }

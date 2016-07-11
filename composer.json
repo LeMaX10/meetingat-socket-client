@@ -7,7 +7,8 @@
     },
     "require-dev": {
         "phpunit/phpunit": "@stable",
-        "mashape/unirest-php": "2.*"
+        "mashape/unirest-php": "2.*",
+        "commerceguys/enum": "^1.0"
     },
     "autoload": {
         "psr-4": {
