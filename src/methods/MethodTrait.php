@@ -61,7 +61,7 @@ trait MethodTrait
             }
         }
 
-        Unirest\Request::timeout($this->timeout);
-        return Unirest\Request::$type($this->getUrlString($url), $this->getHeaders(), $arguments);
+        \Unirest\Request::timeout($this->timeout);
+        return \Unirest\Request::$type($this->getUrlString($url), $this->getHeaders(), $arguments);
     }
 }
