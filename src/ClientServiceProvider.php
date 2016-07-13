@@ -4,7 +4,7 @@ namespace LeMaX10\MeetingatSocketClient;
 use Log;
 use Illuminate\Support\ServiceProvider;
 
-class ClientServiceProvider extends ServiceProvide
+class ClientServiceProvider extends ServiceProvider
 {
     /**
      * Indicates if loading of the provider is deferred.
