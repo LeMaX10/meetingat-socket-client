@@ -3,12 +3,12 @@
     "description": "MeetingAt special client socket server",
     "minimum-stability": "stable",
     "require": {
-        "php": ">=7.0"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "@stable",
+        "php": ">=7.0",
         "mashape/unirest-php": "2.*",
         "commerceguys/enum": "^1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "@stable"
     },
     "autoload": {
         "psr-4": {
