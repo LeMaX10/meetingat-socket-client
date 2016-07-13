@@ -1,5 +1,5 @@
 {
-    "name": "LeMaX/meetingat-socket-client.git",
+    "name": "LeMaX/meetingat-socket-client",
     "description": "MeetingAt special client socket server",
     "minimum-stability": "stable",
     "require": {
