@@ -9,7 +9,6 @@
 namespace LeMaX10\MeetingatSocketClient\methods;
 
 use LeMaX10\MeetingatSocketClient\Enums\SendTypeEnum;
-use Unirest\Request;
 
 trait MethodTrait
 {
@@ -45,23 +44,28 @@ trait MethodTrait
 
     public function getUrlString($url)
     {
-        return $this->config['host'] . $url;
+        return $this->config['host'] . '/api/' . $url;
     }
 
     public function send(string $type, string $url, array $arguments = [])
     {
-        SendTypeEnum::assertExists($type);
-        if(array_key_exists('params', $arguments) && is_array($arguments['params'])) {
-            foreach($arguments['params'] as $param => $value) {
-                $url = str_replace(':' . $param, $value, $url);
+        try {
+            SendTypeEnum::assertExists($type);
+            if (array_key_exists('params', $arguments) && is_array($arguments['params'])) {
+                foreach ($arguments['params'] as $param => $value) {
+                    $url = str_replace(':' . $param, $value, $url);
+                }
+
+                if (array_key_exists('body', $arguments) && is_array($arguments['body'])) {
+                    $arguments = $arguments['body'];
+                }
             }
 
-            if(array_key_exists('body', $arguments) && is_array($arguments['body'])) {
-                $arguments = $arguments['body'];
-            }
+            \Unirest\Request::timeout($this->timeout);
+
+            return \Unirest\Request::$type($this->getUrlString($url), $this->getHeaders(), $arguments);
+        } catch(\Exception $e) {
+
         }
-
-        \Unirest\Request::timeout($this->timeout);
-        return \Unirest\Request::$type($this->getUrlString($url), $this->getHeaders(), $arguments);
     }
 }
