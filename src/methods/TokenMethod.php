@@ -2,7 +2,6 @@
 
 namespace LeMaX10\MeetingatSocketClient\methods;
 
-use App\Models\v1\Token;
 use LeMaX10\MeetingatSocketClient\Enums\SendTypeEnum;
 
 class TokenMethod implements MethodInterface
@@ -29,7 +28,7 @@ class TokenMethod implements MethodInterface
 		return $this->send(SendTypeEnum::DELETE, 'token/:token', ['params' => ['token' => $token], 'body' => $params]);
 	}
 
-	public static function checkAndUpdate(Token $token)
+	public static function checkAndUpdate($token)
 	{
 		$findToken = app('SocketClient')->token->get($token->token);
 		if ($findToken) {
@@ -57,7 +56,7 @@ class TokenMethod implements MethodInterface
 		}
 	}
 
-	public static function checkAndDelete(Token $token)
+	public static function checkAndDelete($token)
 	{
 		$findToken = app('SocketClient')->token->get($token->token);
 		if ($findToken->code == 200)
