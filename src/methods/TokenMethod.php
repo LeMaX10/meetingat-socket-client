@@ -58,8 +58,8 @@ class TokenMethod implements MethodInterface
 
 	public static function checkAndDelete($token)
 	{
-		$findToken = app('SocketClient')->token->get($token->token);
-		if ($findToken->code == 200)
-			app('SocketClient')->token->delete($token->token);
+		$findToken = app('SocketClient')->token->get($token->getAttributes()['token']);
+		if ($findToken && $findToken->code == 200)
+			app('SocketClient')->token->delete($token->getAttributes()['token']);
 	}
 }
