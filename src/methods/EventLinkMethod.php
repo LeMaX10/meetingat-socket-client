@@ -34,7 +34,7 @@ class EventLinkMethod implements MethodInterface
 		$findEventLink = app('SocketClient')->eventLink->get($ep->user_id . ':' . $ep->event_id);
 		$findUser = app('SocketClient')->users->get($ep->user_id);
 
-		if ($findEventLink) {
+		if ($findEventLink && isset($findUser->body->id)) {
 			$attributes = [
 				'rethink_id' => $findUser->body->user_id,
 				'sendPush' => 0,
@@ -44,8 +44,8 @@ class EventLinkMethod implements MethodInterface
 
 			if ($findEventLink->code == 404) {
 				$attributes = array_merge($attributes, [
-					'event_id' => $ep['event_id'],
-					'user_id' => $ep['user_id']
+					'event_id' => $ep->event_id,
+					'user_id' => $ep->user_id
 				]);
 				app('SocketClient')->eventLink->create($attributes);
 			} else if ($findEventLink->code == 200) {
