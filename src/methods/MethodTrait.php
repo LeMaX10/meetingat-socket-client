@@ -14,7 +14,8 @@ trait MethodTrait
 {
     protected $config = [];
     protected $headers = [
-        'Accept' => 'application/json'
+        'Accept' => 'application/json',
+		'Content-Type' => 'application/json; charset=utf-8'
     ];
     protected $timeout = '5';
 
@@ -63,6 +64,7 @@ trait MethodTrait
 
             \Unirest\Request::timeout($this->timeout);
 
+			$arguments = json_encode($arguments);
             return \Unirest\Request::$type($this->getUrlString($url), $this->getHeaders(), $arguments);
         } catch(\Exception $e) {
 
