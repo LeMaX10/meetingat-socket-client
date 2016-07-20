@@ -30,7 +30,7 @@ class TokenMethod implements MethodInterface
 
 	public static function checkAndUpdate($token)
 	{
-		$findToken = app('SocketClient')->token->get($token->token);
+		$findToken = app('SocketClient')->token->get($token->getAttributes()['token']);
 		if ($findToken) {
 			$attributes = [
 				'api_user_id' => $token->user_id,
@@ -51,7 +51,7 @@ class TokenMethod implements MethodInterface
 					'user_id' => $findToken->body->user_id,
 				]);
 
-				app('SocketClient')->token->update($token->token, $attributes);
+				app('SocketClient')->token->update($token->getAttributes()['token'], $attributes);
 			}
 		}
 	}
