@@ -2,6 +2,7 @@
 
 namespace LeMaX10\MeetingatSocketClient\methods;
 
+use App\Models\v1\EventParticipant;
 use LeMaX10\MeetingatSocketClient\Enums\SendTypeEnum;
 
 class EventLinkMethod implements MethodInterface
@@ -28,14 +29,17 @@ class EventLinkMethod implements MethodInterface
 		return $this->send(SendTypeEnum::DELETE, 'eventLink/:ids', ['params' => ['ids' => $ids], 'body' => $params]);
 	}
 
+	/**
+	 * @param $ep EventParticipant
+	 */
 	public static function checkAndUpdate($ep)
 	{
 		$findEventLink = app('SocketClient')->eventLink->get($ep->user_id . ':' . $ep->event_id);
 		$findUser = app('SocketClient')->users->get($ep->user_id);
 
-		if ($findEventLink && isset($findUser->body->id)) {
+		if ($findEventLink && isset(current($findUser->body)->id)) {
 			$attributes = [
-				'rethink_id' => $findUser->body->user_id,
+				'rethink_id' => current($findUser->body)->id,
 				'sendPush' => 0,
 				'sendToApi' => 1,
 				'status' => $ep->status
@@ -53,6 +57,9 @@ class EventLinkMethod implements MethodInterface
 		}
 	}
 
+	/**
+	 * @param $ep EventParticipant
+	 */
 	public static function checkAndDelete($ep)
 	{
 		$findEvenLink = app('SocketClient')->eventLink->get($ep->user_id . ':' . $ep->event_id);
