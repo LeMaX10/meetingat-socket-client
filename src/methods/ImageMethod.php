@@ -39,20 +39,22 @@ class ImageMethod implements MethodInterface
 	{
 		$findImage = $this->get($userModel->id);
 		if($findImage) {
+			if (!$userModel->avatar) {
+				$this->delete($userModel->id);
+				return;
+			}
+
 			$attributes = [
 				'user_id' => $userModel->id,
 				'image_id' => $userModel->avatar->id,
 				'link' => $userModel->avatar->link
 			];
 
-			if ($userModel->avatar) {
-				if($findImage->code == 404) {
-					$this->create($attributes);
-				} else if ($findImage->code == 200) {
-					$this->update($userModel->id, $attributes);
-				}
-			} else
-				$this->delete($userModel->id);
+			if($findImage->code == 404) {
+				$this->create($attributes);
+			} else if ($findImage->code == 200) {
+				$this->update($userModel->id, $attributes);
+			}
 		}
 	}
 }
