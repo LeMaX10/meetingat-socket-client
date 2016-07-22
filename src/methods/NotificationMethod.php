@@ -13,7 +13,7 @@ class NotificationMethod implements MethodInterface
 		return $this->send(SendTypeEnum::POST, 'notification', $arguments);
 	}
 
-	public static function push($arguments)
+	public static function push(array $arguments = [])
 	{
 		app('SocketClient')->token->create($arguments);
 	}
