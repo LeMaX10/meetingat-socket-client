@@ -15,6 +15,6 @@ class NotificationMethod implements MethodInterface
 
 	public static function push($arguments)
 	{
-		app('SocketClient')->token->create($arguments);
+		app('SocketClient')->notification->create($arguments);
 	}
 }
