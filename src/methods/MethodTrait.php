@@ -22,7 +22,7 @@ trait MethodTrait
     public function setConfig(array $config = [])
     {
         $this->config = $config;
-        $this->addHeader('SecretKey', $this->config['secret_key'] ?: null);
+        $this->addHeader('secretkey', $this->config['secret_key'] ?: null);
 
         return $this;
     }
