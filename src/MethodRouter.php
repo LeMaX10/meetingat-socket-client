@@ -1,10 +1,9 @@
-<?php
-namespace LeMaX10\MeetingatSocketClient;
-
+<?php namespace LeMaX10\MeetingatSocketClient;
 
 use LeMaX10\MeetingatSocketClient\methods\EventLinkMethod;
 use LeMaX10\MeetingatSocketClient\methods\FilterMethod;
 use LeMaX10\MeetingatSocketClient\methods\ImageMethod;
+use LeMaX10\MeetingatSocketClient\methods\MessageMethod;
 use LeMaX10\MeetingatSocketClient\methods\NotificationMethod;
 use LeMaX10\MeetingatSocketClient\methods\TokenMethod;
 use LeMaX10\MeetingatSocketClient\methods\UsersMethod;
@@ -18,7 +17,8 @@ class MethodRouter
 		'token' => TokenMethod::class,
         'images' => ImageMethod::class,
         'notification' => NotificationMethod::class,
-		'filter' => FilterMethod::class
+		'filter' => FilterMethod::class,
+		'messages' => MessageMethod::class
     ];
     private $instances = [];
 
