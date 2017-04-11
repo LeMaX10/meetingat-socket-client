@@ -35,7 +35,8 @@ class MessageMethod implements MethodInterface
 	{
 		$findUser = $userId ? app('SocketClient')->users->get($userId) : false;
 		if (!$findUser)
-			throw new \Exception('Пользователь не найден', 500);
+			throw new \Exception('Пользователь не найден', 404);
+		
 		return app('SocketClient')->messages->lastMessages($userId);
 	}
 }
